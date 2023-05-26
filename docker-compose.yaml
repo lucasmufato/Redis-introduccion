@@ -4,15 +4,33 @@ services:
   redis:
     container_name: redis-kata
     hostname: redis
-    image: redis:6.2.5
+    image: redis:7.0.11-alpine
     ports:
       - "16379:6379"
 
-  redis-commander:
-    container_name: redis-commander-kata
-    hostname: redis-commander
-    image: rediscommander/redis-commander:latest
-    environment:
-    - REDIS_HOSTS=local:redis:6379
+  ide:
+    container_name: redis-kata-ide
+    hostname: redis-ide
+    image: redislabs/redisinsight:1.14.0
     ports:
-    - "8881:8081"
+    - "8881:8001"
+
+  slave1:
+    container_name: slave-1
+    hostname: slave1
+    image: redis:7.0.11-alpine
+    ports:
+      - "6378:6379"
+    command: redis-server --slaveof redis-kata 6379
+    depends_on:
+      - redis
+
+  slave2:
+    container_name: slave-2
+    hostname: slave2
+    image: redis:7.0.11-alpine
+    ports:
+      - "6377:6379"
+    command: redis-server --slaveof redis-kata 6379
+    depends_on:
+      - redis

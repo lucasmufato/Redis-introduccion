@@ -21,9 +21,20 @@ internal class RedisUserIdGeneratorTest{
     }
 
     @Test
-    internal fun `some test`() = runBlocking{
+    internal fun `Id starts with 1`() = runBlocking{
         givenArepository()
-        //continuar
+
+        assertEquals(1, userIdGenerator.nextId())
+    }
+
+    @Test
+    internal fun `Ids are secuencially generated`() = runBlocking{
+        givenArepository()
+        userIdGenerator.nextId()
+
+        assertEquals(2, userIdGenerator.nextId())
+        assertEquals(3, userIdGenerator.nextId())
+        assertEquals(4, userIdGenerator.nextId())
     }
 
     private fun givenArepository(){

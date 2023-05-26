@@ -1,3 +1,3 @@
 
-rootProject.name = "redis-introduccion"
+rootProject.name = "Redis-introduccion"
 

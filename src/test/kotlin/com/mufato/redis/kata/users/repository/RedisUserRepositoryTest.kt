@@ -22,7 +22,7 @@ abstract class RedisUserRepositoryTest{
 
     @Test
     fun `saves a user and returns it by its id`() {
-        val user = User(1L, "lucas", "lucas@etermax.com")
+        val user = User(1L, "lucas", "lucas@mufato.com")
         userRepository.save(user)
         val returnedUser = userRepository.getById(1)
         assertEquals(user, returnedUser)
@@ -30,7 +30,7 @@ abstract class RedisUserRepositoryTest{
 
     @Test
     fun `saves a user and returns it by its username`() {
-        val user = User(1L, "lucas", "lucas@etermax.com")
+        val user = User(1L, "lucas", "lucas@mufato.com")
         userRepository.save(user)
         val returnedUser = userRepository.getByUsername("lucas")
         assertEquals(user, returnedUser)
@@ -79,7 +79,7 @@ class RedisSerializedUserRepositoryTest: RedisUserRepositoryTest() {
     import kotlinx.serialization.decodeFromString
     Json.encodeToString(UserItem.from(user))
     Json.decodeFromString<UserItem>(item).toUser()
-     * tamb se puede probar serializacion a manopla
+     *
 
      **/
 
